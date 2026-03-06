@@ -15,6 +15,9 @@ const TRACK_LENGTH = 70;
 
 let tortoisePosition = 1;
 let harePosition = 1;
+
+let tortoiseWins = 0;
+let hareWins = 0;
 let raceIntervalId = null;
 
 startBtn.addEventListener("click", startRace);
