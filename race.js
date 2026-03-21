@@ -10,11 +10,16 @@
 const startBtn = document.getElementById("startBtn");
 const messageEl = document.getElementById("message");
 const trackEl = document.getElementById("track");
+const tortoiseWinEl = document.getElementById("tortoise-win-count");
+const hareWinEl = document.getElementById("hare-win-count");
 
 const TRACK_LENGTH = 70;
 
 let tortoisePosition = 1;
 let harePosition = 1;
+
+let tortoiseWins = 0;
+let hareWins = 0;
 let raceIntervalId = null;
 
 startBtn.addEventListener("click", startRace);
@@ -47,6 +52,7 @@ function raceStep() {
         raceIntervalId = null;
         startBtn.disabled = false;
         showResult();
+        renderScores();
     }
 }
 
@@ -124,9 +130,24 @@ function showResult() {
         messageEl.textContent = "TIE";
     } else if (tortoisePosition >= TRACK_LENGTH) {
         messageEl.textContent = "TORTOISE W";
+        updateScores("tortoise");
     } else if (harePosition >= TRACK_LENGTH) {
         messageEl.textContent = "HARE W";
+        updateScores("hare");
     } else {
         messageEl.textContent = "Race Stopped";
     }
+}
+
+function updateScores(winner) {
+    if (winner === "tortoise") {
+        tortoiseWins++;
+    } else if (winner === "hare") {
+        hareWins++;
+    }
+}
+
+function renderScores() {
+    tortoiseWinEl.textContent = `Torsoise: ${tortoiseWins} wins`;
+    hareWinEl.textContent = `Hare: ${hareWins} wins`;
 }
